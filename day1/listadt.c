@@ -1,45 +1,57 @@
 #include<stdio.h>
 
-#define MAX 100 
+#define MAX 100
 
 typedef struct{
     int data[MAX];
     int size;
 }list;
 
-void createlist(list *list){
+void create(list *list){
     list->size = 0;
-    printf("%d\n",list->size);
 }
 
-void insert(list *list,int value){
+void insert(list *list ,int value){
     if(list->size == MAX){
-        printf("List is full ! cannot insert.\n");
+        printf("List is full.No space to insert anything.\n");
         return;
     }
-    list->data[list->size] = value;
+    list->data[list->size]=value;
     list->size++;
-    printf("%d\n",list->size);
-    for(int i = 0 ;i < list->size;i++){
-        printf("%d\n",i);
-    }
-    printf("%d",list->data[0]);
 }
 
 void delete(list *list){
     if(list->size == 0){
-        printf("List is empty ! nothing to delete here.\n");
+        printf("List is empty.Nothing to delete here.\n");
         return;
     }
+    // list->data[list->size]; if we pass position here we can delete using like this
     list->size--;
 }
 
+void display(list *list){
+    if(list->size == 0){
+        printf("List is empty.Nothing to display here.\n");
+        return;
+    }
+    for(int i = 0 ; i < list->size;i++){
+        printf("%d ",list->data[i]);
+    }
+    printf("\n");
+}
 
 int main(){
     list mylist;
-    createlist(&mylist);
-    insert(&mylist,10);
-    delete(&mylist,1);
-    printf("2 : %d",mylist[0]);
-}
+    create(&mylist);
 
+    insert(&mylist, 10);
+    insert(&mylist, 20);
+    insert(&mylist, 30);
+
+    display(&mylist);
+
+    delete(&mylist);
+    display(&mylist);
+
+    return 0;
+}
